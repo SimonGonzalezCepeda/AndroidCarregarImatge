@@ -1,7 +1,6 @@
 package com.iesebre.dam2.simon.androidcarregarimatge;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,9 +10,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.InputStream;
-import java.net.URL;
-
 public class CarregarImatge extends AppCompatActivity {
 
     @Override
@@ -22,16 +18,24 @@ public class CarregarImatge extends AppCompatActivity {
         setContentView(R.layout.activity_carregar_imatge);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
         private Bitmap loadImageFromNetwork(String url){
+
             try {
-                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
+
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(url).getContent());
+
                 return bitmap;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(View v){
+
+    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+    fab.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick (View view){
             new Thread(new Runnable() {
 
                 public void run() {
